@@ -3,6 +3,7 @@ class Player {
     this.index = null
     this.distance = 0;
     this.name = null;
+    this.rank = null;
   }
 
   static getPlayerInfo(){
@@ -30,5 +31,15 @@ class Player {
       name:this.name,
       distance: this.distance
     });
+  }
+  getPlayerRank(){
+    database.ref("playerRank").on("value",(data)=>{
+      this.rank = data.val();
+    });
+  }
+  static updatePlayerRank(rank){
+    database.ref('/').update({
+      playerRank: rank
+    })
   }
 }
